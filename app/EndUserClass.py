@@ -1,7 +1,6 @@
 import random
 import streamlit as st
 import pandas as pd
-import wording
 import random
 
 # global wording_list_order_ENG
