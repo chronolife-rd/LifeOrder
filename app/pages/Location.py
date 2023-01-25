@@ -1,6 +1,6 @@
 import streamlit as st
 
-import AlgoMatch
+import AlgoMatch as AlgoMatch
 import EndUserClass
 
 
