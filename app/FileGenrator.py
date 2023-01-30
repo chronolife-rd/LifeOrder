@@ -13,7 +13,15 @@ def DicToDataframePlot (dic):
 
      return df
 
-def completeKoreHtml (OrderInformation):
+def completBilingInformation ():
+    pass
+
+def completDetailInformation ():
+    
+    pass
+
+
+def completeKoreHtml (OrderInformation,OrderDetails):
 
     env = Environment(loader=FileSystemLoader("."), autoescape=select_autoescape())
     
@@ -36,14 +44,24 @@ def completeKoreHtml (OrderInformation):
           TShirtQuantity = OrderInformation["Order Information"]["TShirtQuantity"],
           NumberEndUser = OrderInformation["Order Information"]["NumberEndUser"],
 
+          quantity_NEX_TSH_1_01_A32 =  OrderDetails["End user 1"]["T-shirt Quantity "]
+
+
+
+
+
+
+
+
+
     )
 
     return html
 
 
-def downloadKorePDF (OrderInformation):
+def downloadKorePDF (OrderInformation, OrderDetails):
 
-    html = completeKoreHtml(OrderInformation)
+    html = completeKoreHtml(OrderInformation,OrderDetails)
     pdf = pdfkit.from_string(html, False)
     st.download_button(
           "⬇️ Download PDF for Kore order",

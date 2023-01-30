@@ -26,13 +26,25 @@ child4 = {
 
 }
 
+#For excel File 
+
+df = pd.read_excel("ProductReference.xlsx")
+
+html_log = '''
+
+
+  
+
+'''
+
+st.write(df.loc[5][0])
+
 myfamily.update(child4)
 
 print (myfamily["child2"]["name"])
 
 df = pd.DataFrame.from_dict(myfamily,orient="index")
 
-st.dataframe()
 
 yJson = {
 
@@ -40,6 +52,8 @@ yJson = {
     "Genrder":"Mr",
     "Age":"90",
     }
+
+
 
 
 def writejson  (newData, mainData):
