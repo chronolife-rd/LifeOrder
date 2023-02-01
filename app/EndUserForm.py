@@ -6,8 +6,8 @@ from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoad
 import datetime
 import pdfkit
 
-@st.experimental_memo(suppress_st_warning=True)
-def plotOrderInformation (TShirtQuantity):
+
+def plotOrderInformation ():
 
         st.title("Order form")
 
@@ -15,7 +15,7 @@ def plotOrderInformation (TShirtQuantity):
         with st.form ("Form") :
             
             leftColOrder,rightColOrder = st.columns(2)
-            BillingReference = leftColOrder.text_input("Biling Reference :", "BR-FO-121123")
+            BillingReference = leftColOrder.text_input("Biling Reference :")
             PurchaseOrder = rightColOrder.text_input("Purchase Order :", "PO-FO-121123")
 
 
@@ -35,14 +35,16 @@ def plotOrderInformation (TShirtQuantity):
             ClientDepartement = rightColOrder.text_input("Departement", "Cardiologie",disabled=True)            
 
             
-            TShirtQuantity = rightColOrder.number_input("Number of T-shirt to left Order ", TShirtQuantity,disabled=True) # COnnécté à la base de données doit on laiser le choix ?
-            NumberEndUser = leftColOrder.number_input("Number of End User",2,disabled=True) 
-
+            TShirtQuantity = rightColOrder.number_input("Number of T-shirt to left Order ",  10 ,disabled=True) # COnnécté à la base de données doit on laiser le choix ?
+            NumberEndUser = leftColOrder.number_input("Number of End User",0) 
+            submite = st.form_submit_button ("Submit")
+           
+           
             OrderDic = {
                  
                  "Order Information": {
                  
-                 "BillingReference":BillingReference,
+                    "BillingReference":BillingReference,
                     "PurchaseOrder": PurchaseOrder,
                     
                     "ClientPhoneNumber": ClientPhoneNumber,
@@ -61,31 +63,30 @@ def plotOrderInformation (TShirtQuantity):
                     "NumberEndUser":NumberEndUser,
                  
                  }
-                 
-                    
-                 
+               
             }
 
-            submite = st.form_submit_button ("Submit")
+            
 
         
         return NumberEndUser,TShirtQuantity, submite,OrderDic
      
-def GetEndUserInformationEnglish (EnUserQuantity):
-
-        if (EnUserQuantity > 0) :
-            EndUser_form  = st.form( f"End User : {EnUserQuantity}") 
+def GetEndUserInformationEnglish (OrderDic):
+        EndUserQuantity = OrderDic["Order Information"]["NumberEndUser"]
+        
+        if ( EndUserQuantity > 0) :
+            EndUser_form  = st.form( f"End User : {EndUserQuantity}") 
 
             GlobalDic = {}
 
-            for i in range (1,int(EnUserQuantity)+1) :
+            for i in range (1,int(EndUserQuantity)+1) :
                 
                 EndUser_form.write('---')
                 EndUser_form.header(f"Form of end-user {i}")
 
                 EndUserFormRightCol,EndUserFormLeftCol = EndUser_form.columns(2)
-                EndUserGenrder = EndUserFormRightCol.selectbox("Genrder", 
-                            ("-","Ms","Mr"),key = f"{i} Genrder")
+                EndUserGender = EndUserFormRightCol.selectbox("Gender", 
+                            ("-","Ms","Mr"),key = f"{i} Gender")
 
                 
                 EndUserFirstName = EndUserFormRightCol.text_input("End User First Name :","François",key = f"{i} EndUserFirstName")
@@ -107,12 +108,12 @@ def GetEndUserInformationEnglish (EnUserQuantity):
                 endUserDict = {
                     
                     f"End user {i}" : {
-                    "Genre":EndUserGenrder,
+                    "Gendre":EndUserGender,
                     "EndUserFirstName":EndUserFirstName,
                     "EndUserLastName":EndUserLastName,
                     "EndUserSpeakingLanguge":EndUserSpeakingLanguge,
 
-                    "T-shirt Quantity ": EndUserTshirtQuantity,
+                    "EndUserTShirtQuantity": EndUserTshirtQuantity,
                     "EndUserChestTopSize":EndUserChestTopSize,
                     "EndUserChestNippleSize":EndUserChestNippleSize,
                     "EndUserWaistSize":EndUserWaistSize,
@@ -127,8 +128,6 @@ def GetEndUserInformationEnglish (EnUserQuantity):
 
 
                 GlobalDic.update(endUserDict)
-
-
                     
             submite = EndUser_form.form_submit_button ("Submit")
             return submite,GlobalDic
