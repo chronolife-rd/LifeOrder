@@ -4,7 +4,7 @@ import random
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import datetime
 import pdfkit
-
+import jinja2
 
 
 def DicToDataframePlot (dic):
@@ -13,8 +13,30 @@ def DicToDataframePlot (dic):
 
      return df
 
-def completBilingInformation ():
-    pass
+def ClientFileGenerator (dic1, dic):
+
+     name = "Hello"
+     data_frames1 = pd.DataFrame.from_dict(dic1,orient='columns') 
+     data_frames = pd.DataFrame.from_dict(dic,orient="index")
+      
+     templateLoader = jinja2.FileSystemLoader(searchpath="./")
+     templateEnv = jinja2.Environment(loader=templateLoader)
+     TEMPLATE_FILE = "assets/ClientFile/index.html"
+     template = templateEnv.get_template(TEMPLATE_FILE)
+
+     outputText = template.render(df1 = data_frames1, df=data_frames)
+     html_file = open(name + '.html', 'w')
+     html_file.write(outputText)
+     html_file.close()
+     pdfkit.from_file(name + '.html', name + '.pdf')
+
+     with open(f"{name}.pdf","rb") as file :
+          st.download_button("Tableau pdf",
+                         data= file,
+                         file_name="test.pdf",
+                         
+                         )
+
 
 def generateQuantityDic (dicOrder):
     
@@ -107,10 +129,14 @@ def completeKoreHtml (OrderInformation,OrderDetails):
     env = Environment(loader=FileSystemLoader("."), autoescape=select_autoescape())
     myQuantitDoc = generateQuantityDic(OrderDetails)
     template = env.get_template("assets/Korefile/index.html")
+    
+   
+
     html = template.render(
         
           BillingReference = OrderInformation["Order Information"]["BillingReference"],
           PurchaseOrder = OrderInformation["Order Information"]["PurchaseOrder"],
+          RequiredDate = OrderInformation["Order Information"]["RequiredDate"],
           ClientPhoneNumber = OrderInformation["Order Information"]["ClientPhoneNumber"],
           ClientMailAddress = OrderInformation["Order Information"]["ClientMailAddress"],
           ClientInstitution = OrderInformation["Order Information"]["ClientInstitution"],
@@ -163,34 +189,25 @@ def completeKoreHtml (OrderInformation,OrderDetails):
           quantity_NEX_0001_LBL_07 =myQuantitDoc["quantity_NEX_0001_LBL_07"],
           quantity_NEX_0018_LBL_08 =myQuantitDoc["quantity_NEX_0018_LBL_08"],
 
+
     )
 
+    
+
+    
     return html
 
 
-def downloadKorePDF (OrderInformation, OrderDetails):
 
-    html = completeKoreHtml(OrderInformation,OrderDetails)
-    pdf = pdfkit.from_string(html, False)
-    st.download_button(
+def downloadKorePDF (OrderInformation, OrderDetails):
+     
+     html = completeKoreHtml(OrderInformation,OrderDetails)
+
+     pdf = pdfkit.from_string(html, False)
+     st.download_button(
           "⬇️ Download PDF for Kore order",
             data = pdf,
             file_name="Order_Kore_Chronolife.pdf",
           
      )
 
-
-def download_csv_file ( df):
-     csvFile  = convertDataFrameToCSV(df)
-     st.download_button(
-          "⬇️ Download PDF order",
-            data = csvFile,
-            file_name="Order_Chronolife.csv",
-          
-     )
-              
-
-@st.cache
-def convertDataFrameToCSV(df):
-     # IMPORTANT: Cache the conversion to prevent computation on every rerun
-    return df.to_csv().encode('utf-8')

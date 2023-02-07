@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import random
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
-import datetime
+from  datetime import date
 import pdfkit
 
 
@@ -11,12 +11,16 @@ def plotOrderInformation ():
 
         st.title("Order form")
 
+        Orderdate = date.today()
+        Orderdate = Orderdate.strftime("%d/%m/%Y")
 
         with st.form ("Form") :
             
             leftColOrder,rightColOrder = st.columns(2)
             BillingReference = leftColOrder.text_input("Biling Reference :")
             PurchaseOrder = rightColOrder.text_input("Purchase Order :", "PO-FO-121123")
+
+            RequiredDate = leftColOrder.text_input("Required Order Date:",f"{Orderdate}",disabled=True)
 
 
             ClientPhoneNumber = leftColOrder.text_input("Contractore Phone Number","06 50 62 93 22",disabled=True)
@@ -46,6 +50,7 @@ def plotOrderInformation ():
                  
                     "BillingReference":BillingReference,
                     "PurchaseOrder": PurchaseOrder,
+                    "RequiredDate":RequiredDate,
                     
                     "ClientPhoneNumber": ClientPhoneNumber,
                     "ClientMailAddress":ClientMailAddress,
@@ -89,9 +94,11 @@ def GetEndUserInformationEnglish (OrderDic):
                             ("-","Ms","Mr"),key = f"{i} Gender")
 
                 
-                EndUserFirstName = EndUserFormRightCol.text_input("End User First Name :","François",key = f"{i} EndUserFirstName")
-                EndUserLastName = EndUserFormLeftCol.text_input("End User Last Name :","Ottavi",key = f"{i} EndUserLastName")
-                EndUserSpeakingLanguge = EndUserFormLeftCol.selectbox("Speaking Languge :", 
+                # EndUserFirstName = EndUserFormRightCol.text_input("End User First Name :","François",key = f"{i} EndUserFirstName")
+                # EndUserLastName = EndUserFormLeftCol.text_input("End User Last Name :","Ottavi",key = f"{i} EndUserLastName")
+                EndUserID = EndUserFormLeftCol.text_input("End User ID :","ZEpxRz",key = f"{i} EndUserID")
+                 
+                EndUserSpeakingLanguge = EndUserFormLeftCol.selectbox("Speaking Language :", 
                             ("-","English","Français"),key = f"{i} EndUserSpeakingLanguge")
                 
                 # ------------- Device ----------------
@@ -101,7 +108,7 @@ def GetEndUserInformationEnglish (OrderDic):
                 EndUserWaistSize = EndUserFormRightCol.number_input("End User EndUserWaistSize size :",1,key = f"{i} EndUserWaistSize")
                 EndUserHipsSize = EndUserFormRightCol.number_input("End User EndUserHipsSize size :",1,key = f"{i} EndUserHipsSize")
                 EndUserReferenceSize = EndUserFormRightCol.number_input("End User EndUserReferenceSize size :",1,key = f"{i} EndUserReferenceSize")
-                EndUserAdaptateur = EndUserFormRightCol.selectbox("Adaptaeur Type ", 
+                EndUserAdaptateur = EndUserFormRightCol.selectbox("Adapteur Type :", 
                             ("-","US","Europe"),key = f"{i} EndUserAdaptateur")
 
 
@@ -109,16 +116,18 @@ def GetEndUserInformationEnglish (OrderDic):
                     
                     f"End user {i}" : {
                     "Gendre":EndUserGender,
-                    "EndUserFirstName":EndUserFirstName,
-                    "EndUserLastName":EndUserLastName,
+
+                    "EndUserID":EndUserID,
+                    # "EndUserFirstName":EndUserFirstName,
+                    # "EndUserLastName":EndUserLastName,
                     "EndUserSpeakingLanguge":EndUserSpeakingLanguge,
 
                     "EndUserTShirtQuantity": EndUserTshirtQuantity,
-                    "EndUserChestTopSize":EndUserChestTopSize,
-                    "EndUserChestNippleSize":EndUserChestNippleSize,
-                    "EndUserWaistSize":EndUserWaistSize,
-                    "EndUserHipsSize":EndUserHipsSize,
-                    "EndUserReferenceSize":EndUserReferenceSize,
+                    # "EndUserChestTopSize":EndUserChestTopSize,
+                    # "EndUserChestNippleSize":EndUserChestNippleSize,
+                    # "EndUserWaistSize":EndUserWaistSize,
+                    # "EndUserHipsSize":EndUserHipsSize,
+                    # "EndUserReferenceSize":EndUserReferenceSize,
 
                     "EndUserAdaptateur":EndUserAdaptateur,
 

@@ -19,16 +19,15 @@ if ( int(dicOrder["Order Information"]["NumberEndUser"]) > 0 ):
 
         #Créer fonction de caluler et ajouter la taille des T-shirt dans le df
         #Creer fonctions de génératon des ID
-        #Créer fonction d'ajour des ID dans le tableau
-
+        #Créer fonction d'ajour des ID dans le tablea
+        
         st.write()
 
-
         fg.downloadKorePDF(dicOrder,dicOrderDetail)
+        fg.ClientFileGenerator(dicOrder,dicOrderDetail)
 
 
         
-
 
 
 
