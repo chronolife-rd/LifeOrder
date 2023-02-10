@@ -5,39 +5,16 @@ from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoad
 import datetime
 import pdfkit
 import jinja2
+from zipfile import ZipFile
 
 
-def DicToDataframePlot (dic):
-     df = pd.DataFrame.from_dict(dic,orient='index') 
-     st.dataframe(df)
-     return df
+def DicToDataframePlot (GlobalOrderInfo,DetailOrderInfo):
+     df_GlobalOrderInfo= pd.DataFrame(GlobalOrderInfo,index = [0]) 
+     df_DetailOrderInfo= pd.DataFrame.from_dict(DetailOrderInfo,orient='index') 
 
-def ClientFileGenerator (dic1, dic):
+     st.dataframe(df_GlobalOrderInfo)
+     st.dataframe(df_DetailOrderInfo)
 
-     name = "Hello"
-     data_frames1 = pd.DataFrame.from_dict(dic1,orient='columns') 
-     data_frames = pd.DataFrame.from_dict(dic,orient="index")
-
-     st.dataframe (data_frames)
-      
-     templateLoader = jinja2.FileSystemLoader(searchpath="./")
-     templateEnv = jinja2.Environment(loader=templateLoader)
-     TEMPLATE_FILE = "assets/ClientFile/index.html"
-     template = templateEnv.get_template(TEMPLATE_FILE)
-
-     outputText = template.render( df1 = data_frames1,df=data_frames)
-
-     html_file = open(name + '.html', 'w')
-     html_file.write(outputText)
-     html_file.close()
-     pdfkit.from_file(name + '.html', name + '.pdf')
-
-     with open(f"{name}.pdf","rb") as file :
-          st.download_button("Tableau pdf",
-                         data= file,
-                         file_name="test.pdf",
-                         
-                         )
 
 
 def generateQuantityDic (dicOrder):
@@ -200,7 +177,6 @@ def completeKoreHtml (OrderInformation,OrderDetails):
     return html
 
 
-
 def downloadKorePDF (OrderInformation, OrderDetails):
      
      html = completeKoreHtml(OrderInformation,OrderDetails)
@@ -212,4 +188,99 @@ def downloadKorePDF (OrderInformation, OrderDetails):
             file_name="Order_Kore_Chronolife.pdf",
           
      )
+
+
+
+
+def ClientFileGenerator (OrderInformation, OrderDetails):
+     
+     companyName = OrderInformation["ClientInstitution"]
+     orderNumber = OrderInformation["OrderNumber"]
+
+
+     clientFileName = f"{companyName}_{orderNumber}"
+
+
+     df_OrderInformation = pd.DataFrame(OrderInformation,index = [0]) 
+     df_OrderDetails = pd.DataFrame.from_dict(OrderDetails,orient="index")
+
+     templateLoader = jinja2.FileSystemLoader(searchpath="./")
+     templateEnv = jinja2.Environment(loader=templateLoader)
+     TEMPLATE_FILE = "assets/ClientFile/index.html"
+     template = templateEnv.get_template(TEMPLATE_FILE)
+     
+     outputText = template.render( 
+          
+          BillingReference = OrderInformation["BillingReference"],
+          OrderNumber = OrderInformation["OrderNumber"],
+          RequiredDate = OrderInformation["RequiredDate"],
+          ClientPhoneNumber = OrderInformation["ClientPhoneNumber"],
+          ClientMailAddress = OrderInformation["ClientMailAddress"],
+          ClientInstitution = OrderInformation["ClientInstitution"],
+          ClientAddressNumber = OrderInformation["ClientAddressNumber"],
+          ClientStreet = OrderInformation["ClientStreet"],
+          ClientAttn = OrderInformation["ClientAttn"],
+          ClientZIPCode = OrderInformation["ClientZIPCode"],
+          ClientCity = OrderInformation["ClientCity"],
+          ClientCountry = OrderInformation["ClientCountry"],
+          ClientSiteNR = OrderInformation["ClientSiteNR"],
+          ClientDepartement = OrderInformation["ClientDepartement"],
+          TShirtQuantity = OrderInformation["TShirtQuantity"],
+          NumberEndUser = OrderInformation["NumberEndUser"],
+          df=df_OrderDetails)
+
+     html_file = open(clientFileName + '.html', 'w')
+     html_file.write(outputText)
+     html_file.close()
+     
+     pdfkit.from_file(clientFileName + '.html', clientFileName + '.pdf')
+
+     with open(f"{clientFileName}.pdf","rb") as file :
+          st.download_button("Tableau pdf",
+                         data= file,
+                         file_name=f"{clientFileName}.pdf",
+                         
+                         )
+
+
+
+
+
+def downloadZipFile (OrderInformation, OrderDetails):
+     
+     
+     #Required Information to rename the Kore et Client file 
+     companyName = OrderInformation["ClientInstitution"]
+     orderNumber = OrderInformation["OrderNumber"]
+
+     #Create a Zip file  with Client & Kore file in pdf 
+     zipObj = ZipFile('sample.zip','w')
+
+
+     #Genrate Kore file and crete a PDF file
+     html = completeKoreHtml(OrderInformation,OrderDetails)
+     koreFileName = f"{companyName}_{orderNumber}_Kore.pdf"
+     pdfkit.from_string(html, koreFileName)
+
+     clientFileName = f"{companyName}_{orderNumber}"
+
+
+     #Compress Client & Kore file in a zip file
+
+
+     zipObj.write(f"{clientFileName}.pdf")
+     zipObj.write(koreFileName)
+     zipObj.close()
+
+
+     #Create a streamlit button to download ZIP file
+     with open("sample.zip", "rb") as fp:
+          st.download_button(
+               '⬇️ Download Zip file',
+               data= fp,
+               file_name= f"{orderNumber}.zip"
+          )
+
+
+
 

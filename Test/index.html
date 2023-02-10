@@ -97,46 +97,33 @@
 </style>
     
 <body>
-    <table>
-        <tr>
-            {% for column in df.columns %}
-            <th>{{ column }}</th>
+    <div class="product-forms">
+        
+        <span class="order-summary chrono-container"></span>
+        <table class="form-header">
+
+            <tr >
+                {% for column in df.columns %}
+                <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+            {% for idx, row in df.iterrows() %}
+            <tr>
+                {% for colname in df.columns %}
+                <td>{{ row[colname] }}</td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-        {% for idx, row in df.iterrows() %}
-        <tr>
-            {% for colname in df.columns %}
-            <td>{{ row[colname] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
-</body>
-<footer>
-    
-    <div class="blue-background">
-        <div>
-            <div class="address">
-                <p>Chronolife SAS</p>
-                <p>74 rue du faubourg Saint-Antoine</p>
-                <p>75012 Paris,</p>
-                <p>FRANCE</p>
-            </div>
-            <div class="address">
-                <p>Chronolife, Inc.
-                </p>
-                <p>C/O Lisan Finance, Inc.
-                </p>
-                <p>400 Montgomery St
-                </p>
-                <p>San Francisco, CA 94111</p>
-            </div>
-    
-        </div>
-        <p class="lower">Copyright © Chronolife 2022. All rights reserved.</p>
+        </table>
+
+
+
 
     </div>
-</footer>
+
+    </body>
+    
+    
     
 </html>
 

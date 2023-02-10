@@ -115,9 +115,12 @@ def GetEndUserInformationEnglish (OrderDic):
                 endUserDict = {
                     
                     f"End user {i}" : {
+                     
+                    # "End user reference ": f"End user {i}",
+                                    
+                    "EndUserID":EndUserID,
                     "Gendre":EndUserGender,
 
-                    "EndUserID":EndUserID,
                     # "EndUserFirstName":EndUserFirstName,
                     # "EndUserLastName":EndUserLastName,
                     "EndUserSpeakingLanguge":EndUserSpeakingLanguge,
@@ -127,7 +130,7 @@ def GetEndUserInformationEnglish (OrderDic):
                     # "EndUserChestNippleSize":EndUserChestNippleSize,
                     # "EndUserWaistSize":EndUserWaistSize,
                     # "EndUserHipsSize":EndUserHipsSize,
-                    # "EndUserReferenceSize":EndUserReferenceSize,
+                    "EndUserReferenceSize":EndUserReferenceSize,
 
                     "EndUserAdaptateur":EndUserAdaptateur,
 
