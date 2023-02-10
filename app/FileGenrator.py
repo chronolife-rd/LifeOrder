@@ -10,7 +10,6 @@ import jinja2
 def DicToDataframePlot (dic):
      df = pd.DataFrame.from_dict(dic,orient='index') 
      st.dataframe(df)
-
      return df
 
 def ClientFileGenerator (dic1, dic):
@@ -18,13 +17,16 @@ def ClientFileGenerator (dic1, dic):
      name = "Hello"
      data_frames1 = pd.DataFrame.from_dict(dic1,orient='columns') 
      data_frames = pd.DataFrame.from_dict(dic,orient="index")
+
+     st.dataframe (data_frames)
       
      templateLoader = jinja2.FileSystemLoader(searchpath="./")
      templateEnv = jinja2.Environment(loader=templateLoader)
      TEMPLATE_FILE = "assets/ClientFile/index.html"
      template = templateEnv.get_template(TEMPLATE_FILE)
 
-     outputText = template.render(df1 = data_frames1, df=data_frames)
+     outputText = template.render( df1 = data_frames1,df=data_frames)
+
      html_file = open(name + '.html', 'w')
      html_file.write(outputText)
      html_file.close()
@@ -134,22 +136,22 @@ def completeKoreHtml (OrderInformation,OrderDetails):
 
     html = template.render(
         
-          BillingReference = OrderInformation["Order Information"]["BillingReference"],
-          PurchaseOrder = OrderInformation["Order Information"]["PurchaseOrder"],
-          RequiredDate = OrderInformation["Order Information"]["RequiredDate"],
-          ClientPhoneNumber = OrderInformation["Order Information"]["ClientPhoneNumber"],
-          ClientMailAddress = OrderInformation["Order Information"]["ClientMailAddress"],
-          ClientInstitution = OrderInformation["Order Information"]["ClientInstitution"],
-          ClientAddressNumber = OrderInformation["Order Information"]["ClientAddressNumber"],
-          ClientStreet = OrderInformation["Order Information"]["ClientStreet"],
-          ClientAttn = OrderInformation["Order Information"]["ClientAttn"],
-          ClientZIPCode = OrderInformation["Order Information"]["ClientZIPCode"],
-          ClientCity = OrderInformation["Order Information"]["ClientCity"],
-          ClientCountry = OrderInformation["Order Information"]["ClientCountry"],
-          ClientSiteNR = OrderInformation["Order Information"]["ClientSiteNR"],
-          ClientDepartement = OrderInformation["Order Information"]["ClientDepartement"],
-          TShirtQuantity = OrderInformation["Order Information"]["TShirtQuantity"],
-          NumberEndUser = OrderInformation["Order Information"]["NumberEndUser"],
+          BillingReference = OrderInformation["BillingReference"],
+          OrderNumber = OrderInformation["OrderNumber"],
+          RequiredDate = OrderInformation["RequiredDate"],
+          ClientPhoneNumber = OrderInformation["ClientPhoneNumber"],
+          ClientMailAddress = OrderInformation["ClientMailAddress"],
+          ClientInstitution = OrderInformation["ClientInstitution"],
+          ClientAddressNumber = OrderInformation["ClientAddressNumber"],
+          ClientStreet = OrderInformation["ClientStreet"],
+          ClientAttn = OrderInformation["ClientAttn"],
+          ClientZIPCode = OrderInformation["ClientZIPCode"],
+          ClientCity = OrderInformation["ClientCity"],
+          ClientCountry = OrderInformation["ClientCountry"],
+          ClientSiteNR = OrderInformation["ClientSiteNR"],
+          ClientDepartement = OrderInformation["ClientDepartement"],
+          TShirtQuantity = OrderInformation["TShirtQuantity"],
+          NumberEndUser = OrderInformation["NumberEndUser"],
 
           quantity_NEX_TSH_1_01_A32 = myQuantitDoc["quantity_NEX_TSH_1_01_A32"],
           quantity_NEX_TSH_1_01_A34 = myQuantitDoc["quantity_NEX_TSH_1_01_A34"],

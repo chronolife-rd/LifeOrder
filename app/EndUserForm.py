@@ -18,7 +18,7 @@ def plotOrderInformation ():
             
             leftColOrder,rightColOrder = st.columns(2)
             BillingReference = leftColOrder.text_input("Biling Reference :")
-            PurchaseOrder = rightColOrder.text_input("Purchase Order :", "PO-FO-121123")
+            OrderNumber = rightColOrder.text_input("Order Number :", "PO-FO-121123")
 
             RequiredDate = leftColOrder.text_input("Required Order Date:",f"{Orderdate}",disabled=True)
 
@@ -46,10 +46,10 @@ def plotOrderInformation ():
            
             OrderDic = {
                  
-                 "Order Information": {
+                 
                  
                     "BillingReference":BillingReference,
-                    "PurchaseOrder": PurchaseOrder,
+                    "OrderNumber": OrderNumber,
                     "RequiredDate":RequiredDate,
                     
                     "ClientPhoneNumber": ClientPhoneNumber,
@@ -67,7 +67,7 @@ def plotOrderInformation ():
                     "TShirtQuantity":TShirtQuantity,
                     "NumberEndUser":NumberEndUser,
                  
-                 }
+                 
                
             }
 
@@ -77,7 +77,7 @@ def plotOrderInformation ():
         return NumberEndUser,TShirtQuantity, submite,OrderDic
      
 def GetEndUserInformationEnglish (OrderDic):
-        EndUserQuantity = OrderDic["Order Information"]["NumberEndUser"]
+        EndUserQuantity = OrderDic["NumberEndUser"]
         
         if ( EndUserQuantity > 0) :
             EndUser_form  = st.form( f"End User : {EndUserQuantity}") 
