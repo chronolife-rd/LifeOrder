@@ -20,26 +20,26 @@ def plotOrderInformation ():
             BillingReference = leftColOrder.text_input("Biling Reference :")
             OrderNumber = rightColOrder.text_input("Order Number :", "PO-FO-121123")
 
-            RequiredDate = leftColOrder.text_input("Required Order Date:",f"{Orderdate}",disabled=True)
+            RequiredDate = leftColOrder.text_input("Required Order Date:",f"{Orderdate}")
 
 
-            ClientPhoneNumber = leftColOrder.text_input("Contractore Phone Number","06 50 62 93 22",disabled=True)
-            ClientMailAddress = rightColOrder.text_input("E-mail :","francois@inserm.fr",disabled=True)
+            ClientPhoneNumber = leftColOrder.text_input("Contractore Phone Number","06 50 62 93 22")
+            ClientMailAddress = rightColOrder.text_input("E-mail :","francois@inserm.fr")
 
 
-            ClientInstitution = leftColOrder.text_input("Institution :","INSERM",disabled=True)
-            ClientAddressNumber = leftColOrder.text_input ("Adresse Number :","43 bis",disabled=True)
-            ClientStreet = leftColOrder.text_input("Delivery Street:","rue de la république",disabled=True)
-            ClientAttn = leftColOrder.text_input("Attn :","None",disabled=True)
-            ClientZIPCcode =  leftColOrder.text_input("Delivery ZIPC code :","59700",disabled=True)
+            ClientInstitution = leftColOrder.text_input("Institution :","INSERM")
+            ClientAddressNumber = leftColOrder.text_input ("Adresse Number :","43 bis")
+            ClientStreet = leftColOrder.text_input("Delivery Street:","rue de la république")
+            ClientAttn = leftColOrder.text_input("Attn :","None")
+            ClientZIPCcode =  leftColOrder.text_input("Delivery ZIPC code :","59700")
 
-            ClientCity =  rightColOrder.text_input("City :","Lille",disabled=True)
-            ClientCountry = rightColOrder.text_input("Country","France",disabled=True)
-            ClientSiteNR =  rightColOrder.text_input("Site NR","123",disabled=True)
-            ClientDepartement = rightColOrder.text_input("Departement", "Cardiologie",disabled=True)            
+            ClientCity =  rightColOrder.text_input("City :","Lille")
+            ClientCountry = rightColOrder.text_input("Country","France")
+            ClientSiteNR =  rightColOrder.text_input("Site NR","123")
+            ClientDepartement = rightColOrder.text_input("Departement", "Cardiologie")            
 
             
-            TShirtQuantity = rightColOrder.number_input("Number of T-shirt to left Order ",  10 ,disabled=True) # COnnécté à la base de données doit on laiser le choix ?
+            TShirtQuantity = rightColOrder.number_input("Number of T-shirt to left Order ",  10) # COnnécté à la base de données doit on laiser le choix ?
             NumberEndUser = leftColOrder.number_input("Number of End User",0) 
             submite = st.form_submit_button ("Submit")
            
