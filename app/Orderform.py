@@ -16,31 +16,31 @@ def plotOrderInformation ():
 
         with st.form ("Form") :
             
-            leftColOrder,rightColOrder = st.columns(2)
-            BillingReference = leftColOrder.text_input("Biling Reference :")
-            OrderNumber = rightColOrder.text_input("Order Number :", "PO-FO-121123")
+            globalOrder1,globalOrder2 , globalOrder3= st.columns(3)
+            BillingReference = globalOrder1.text_input("Biling Reference :")
+            OrderNumber = globalOrder1.text_input("Order Number :", "PO-FO-121123")
 
-            RequiredDate = leftColOrder.text_input("Required Order Date:",f"{Orderdate}")
-
-
-            ClientPhoneNumber = leftColOrder.text_input("Contractore Phone Number","06 50 62 93 22")
-            ClientMailAddress = rightColOrder.text_input("E-mail :","francois@inserm.fr")
+            RequiredDate = globalOrder1.text_input("Required Order Date:",f"{Orderdate}")
 
 
-            ClientInstitution = leftColOrder.text_input("Institution :","INSERM")
-            ClientAddressNumber = leftColOrder.text_input ("Adresse Number :","43 bis")
-            ClientStreet = leftColOrder.text_input("Delivery Street:","rue de la république")
-            ClientAttn = leftColOrder.text_input("Attn :","None")
-            ClientZIPCcode =  leftColOrder.text_input("Delivery ZIPC code :","59700")
+            ClientPhoneNumber = globalOrder1.text_input("Client Phone Number","06 50 62 93 22")
+            ClientMailAddress = globalOrder1.text_input("Client E-mail :","francois@inserm.fr")
 
-            ClientCity =  rightColOrder.text_input("City :","Lille")
-            ClientCountry = rightColOrder.text_input("Country","France")
-            ClientSiteNR =  rightColOrder.text_input("Site NR","123")
-            ClientDepartement = rightColOrder.text_input("Departement", "Cardiologie")            
+
+            ClientInstitution = globalOrder2.text_input("Institution / Company :","INSERM")
+            ClientAddressNumber = globalOrder2.text_input ("Adresse Number :","43 bis")
+            ClientStreet = globalOrder2.text_input("Delivery Street:","rue de la république")
+            ClientAttn = globalOrder2.text_input("Attn :","None")
+            ClientZIPCcode =  globalOrder2.text_input("Delivery ZIPC code :","59700")
+
+            ClientCity =  globalOrder2.text_input("City :","Lille")
+            ClientCountry = globalOrder2.text_input("Country","France")
+            ClientSiteNR =  globalOrder2.text_input("Site NR","123")
+            ClientDepartement = globalOrder2.text_input("Departement", "Cardiologie")            
 
             
-            TShirtQuantity = rightColOrder.number_input("Number of T-shirt to left Order ",  10) # COnnécté à la base de données doit on laiser le choix ?
-            NumberEndUser = leftColOrder.number_input("Number of End User",0) 
+            TShirtQuantity = globalOrder3.number_input("Number of T-shirt to left Order ",  10) # COnnécté à la base de données doit on laiser le choix ?
+            NumberEndUser = globalOrder3.number_input("Number of End User",0) 
             submite = st.form_submit_button ("Submit")
            
            
@@ -91,22 +91,22 @@ def GetEndUserInformationEnglish (OrderDic):
 
                 EndUserFormRightCol,EndUserFormLeftCol = EndUser_form.columns(2)
                 EndUserGender = EndUserFormRightCol.selectbox("Gender", 
-                            ("-","Ms","Mr"),key = f"{i} Gender")
+                            ("-","Female","Male"),key = f"{i} Gender")
 
                 
                 # EndUserFirstName = EndUserFormRightCol.text_input("End User First Name :","François",key = f"{i} EndUserFirstName")
                 # EndUserLastName = EndUserFormLeftCol.text_input("End User Last Name :","Ottavi",key = f"{i} EndUserLastName")
-                EndUserID = EndUserFormLeftCol.text_input("End User ID :","ZEpxRz",key = f"{i} EndUserID")
+                EndUserID = EndUserFormRightCol.text_input("End User ID :","ZEpxRz",key = f"{i} EndUserID")
                  
-                EndUserSpeakingLanguge = EndUserFormLeftCol.selectbox("Speaking Language :", 
+                EndUserSpeakingLanguge = EndUserFormRightCol.selectbox("Speaking Language :", 
                             ("-","English","Français"),key = f"{i} EndUserSpeakingLanguge")
                 
                 # ------------- Device ----------------
-                EndUserTshirtQuantity = EndUserFormRightCol.number_input("Quantity of T-shirt for this End User :",1,key = f"{i} EndUserTshirtQuantity")
-                EndUserChestTopSize = EndUserFormRightCol.number_input("End User chest top size :",1,key = f"{i} EndUserChestTopSize")
-                EndUserChestNippleSize = EndUserFormRightCol.number_input("End User chest Nipple size :",1,key = f"{i} EndUserChestNippleSize")
-                EndUserWaistSize = EndUserFormRightCol.number_input("End User EndUserWaistSize size :",1,key = f"{i} EndUserWaistSize")
-                EndUserHipsSize = EndUserFormRightCol.number_input("End User EndUserHipsSize size :",1,key = f"{i} EndUserHipsSize")
+                EndUserTshirtQuantity = EndUserFormLeftCol.number_input("Quantity of T-shirt for this End User :",1,key = f"{i} EndUserTshirtQuantity")
+                EndUserChestTopSize = EndUserFormLeftCol.number_input("End User chest top size :",1,key = f"{i} EndUserChestTopSize")
+                EndUserChestNippleSize = EndUserFormLeftCol.number_input("End User chest Nipple size :",1,key = f"{i} EndUserChestNippleSize")
+                EndUserWaistSize = EndUserFormLeftCol.number_input("End User EndUserWaistSize size :",1,key = f"{i} EndUserWaistSize")
+                EndUserHipsSize = EndUserFormLeftCol.number_input("End User EndUserHipsSize size :",1,key = f"{i} EndUserHipsSize")
                 EndUserReferenceSize = EndUserFormRightCol.number_input("End User EndUserReferenceSize size :",1,key = f"{i} EndUserReferenceSize")
                 EndUserAdaptateur = EndUserFormRightCol.selectbox("Adapteur Type :", 
                             ("-","US","Europe"),key = f"{i} EndUserAdaptateur")
