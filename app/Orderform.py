@@ -146,7 +146,6 @@ def GetEndUserInformationEnglish (OrderDic):
     
         else :
             
-            st.warning("Pas end user séléctionné")
             submite = False
             df = []
             return submite,df
