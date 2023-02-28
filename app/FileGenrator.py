@@ -12,7 +12,7 @@ def DicToDataframePlot (GlobalOrderInfo,DetailOrderInfo):
      df_GlobalOrderInfo= pd.DataFrame(GlobalOrderInfo,index = [0]) 
      df_DetailOrderInfo= pd.DataFrame.from_dict(DetailOrderInfo,orient='index') 
 
-     st.dataframe(df_GlobalOrderInfo)
+     # st.dataframe(df_GlobalOrderInfo)
      st.dataframe(df_DetailOrderInfo)
 
 
