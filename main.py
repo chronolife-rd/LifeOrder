@@ -73,29 +73,20 @@ if __name__ == '__main__':
 
     my_flowables = []
     
-    df_data  = {
+    data  = {
         # "EndUserID":["","EZPs23",""],
         "Reference":["NEX -TSH-1-01-A32","NEX -TSH-1-01-A34","NEX -TSH-1-01-A36"],
         "Description":['CST T-shirt Size 32','CST T-shirt Size 34','CST T-shirt Size 36'],
         "Quantity": [2,3,1]
     }
 
-    my_df = pd.DataFrame(df_data)
+    my_df = pd.DataFrame(data)
 
-
-    my_data = [['End User XXX','',''],
-            ['Reference','Description','Quantity'],
-            ['col_{}'.format(x) for x in range(1, 4)],
-            [str(x) for x in range(1, 4)],
-            ['a', 'b', 'c'],
-            ]
-    
     my_main_list = endUserListGenerator("eSar23a",my_df)
     
     my_doc = create_PDF(name="test1")
 
     my_table = simple_table_with_style(my_main_list)
-    my_table2 = simple_table_with_style(my_data)
 
     my_flowables = add_table_to_PDF(my_table,my_flowables)
     
