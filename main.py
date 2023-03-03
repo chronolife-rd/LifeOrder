@@ -93,7 +93,7 @@ def endUserListGeneratorV2 (endUserId,dic):
     descriptionList_1 = list(descriptionDic_1)
     quantityList_1 = list(quantityDic_1)
     
-    for i in range (len(df_datamaindic2_traspose)) :
+    for i in range (len(refdic_1)) :
         
         end_user_list.append([reflist_1[i],descriptionList_1[i],quantityList_1[i]])
         # end_user_list.append(descriptionList_1[i])
@@ -109,7 +109,7 @@ if __name__ == '__main__':
 
     datamaindic2 = {
             1: {'EndUserID': 'ZEpxRz', 
-                'Reference': {'CHQ-3-10', 'NEX-0014-LBL-09', 'USQ-0-01', 'NEX-TSH-1-01-1', 'PSS-0-01', 'ASE-0-01', 'NEX-0017-LBL-08'}, 
+                'Reference': {'CHQ-3-00', 'NEX-0014-LBL-01', 'USQ-0-01', 'NEX-TSH-1-01-1', 'PSS-0-01', 'ASE-0-01', 'NEX-0017-LBL-08'}, 
                 'Description': {'Wireless Charger', 'USB cable for wireless charger', 'Power Supply', 'CST T-shirt Size 1', 'CST Quick Start Guide – FR', 'EU adaptor', 'CST Instruction for Use – FR'}, 
                 'Quantity': {1,1,1,1,1,1}}, 
             # 2: {'EndUserID': 'ZEpxRz', 'Reference': 
