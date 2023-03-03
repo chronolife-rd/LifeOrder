@@ -209,59 +209,7 @@ def EndUsersOrderGeneration (dic):
         
         enduserdic2["EndUserID"] = endUserId    
             
-            
-        endUserDic["EndUserID"] = endUserId
-        
-
-        endUserDic["0"] = {
-            "Reference":endUserTshirtRefrence,
-            "Description":endUserTshirtDescription,
-            "Quantity":endUserTshirtQuantity
-
-        }
-        endUserDic["1"] = {
-            "Reference":endUserIFURefrence,
-            "Description":endUserIFUDescription,
-            "Quantity":endUserIFUQuantity
-
-        }
-
-        endUserDic["2"] = {
-            "Reference":endUserQSGReference,
-            "Description":endUserQSGDescription,
-            "Quantity":endUserQSGQuantity
-
-        }
-
-        endUserDic["3"] = {
-            "Reference":endUserWCReference,
-            "Description":endUserWCDescription,
-            "Quantity":endUserWCQuantity
-
-        }
-
-        endUserDic["4"] = {
-            "Reference":endUserUSBReference,
-            "Description":endUserUSBDescription,
-            "Quantity":endUserUSBQuantity
-
-        }
-
-        endUserDic["5"] = {
-            "Reference":endUserPSReference,
-            "Description":endUserPSDescription,
-            "Quantity":endUserPSQuantity
-
-        }
-
-
-        endUserDic["6"] = {
-            "Reference":endUserAdaptateurReference,
-            "Description":endUserAdaptateurDescription,
-            "Quantity":endUserAdaptateurQuantity
-
-        }
-
+    
 
         enduserdic2["Reference"] = {"Tshirt":endUserTshirtRefrence,
                                    "IFU":endUserIFURefrence,
@@ -297,32 +245,3 @@ def EndUsersOrderGeneration (dic):
 
     return mainDF,maindic,maindic2
 
-
-
-
-
-        # endUserDic["Reference"] = {endUserTshirtRefrence,
-        #                            endUserIFURefrence,
-        #                            endUserQSGReference,
-        #                            endUserWCReference,
-        #                            endUserUSBReference,
-        #                            endUserPSReference,
-        #                            endUserAdaptateurReference
-        #                            }
-        
-        # endUserDic["Description"]= {endUserTshirtDescription,
-        #                            endUserIFUDescription,
-        #                            endUserQSGDescription,
-        #                            endUserWCDescription,
-        #                            endUserUSBDescription,
-        #                            endUserPSDescription,
-        #                            endUserAdaptateurDescription}
-        
-        # endUserDic["Quantity"]= {endUserTshirtQuantity,
-        #                            endUserIFUQuantity,
-        #                            endUserQSGQuantity,
-        #                            endUserWCQuantity,
-        #                            endUserUSBQuantity,
-        #                            endUserPSQuantity,
-        #                            endUserAdaptateurQuantity}
-        

@@ -2,10 +2,8 @@ import streamlit as st
 
 import Orderform
 import FileGenrator as fg
-import pandas as pd
 from tableOrderGenerator import EndUsersOrderGeneration
-import json
-
+from OrderToPDF import order_to_PDF
 myOrderNumberEndUser,TshirtQ,submit,dicOrder = Orderform.plotOrderInformation()
 
 
@@ -18,20 +16,18 @@ if ( int(dicOrder["NumberEndUser"]) > 0 ):
         
         fg.DicToDataframePlot(dicOrder,dicOrderDetail)  
 
-        mainDF,main_dic,maindic2 = EndUsersOrderGeneration(dicOrderDetail)
-        st.dataframe(mainDF)
-        
-        
-        st.write(maindic2)
+        mainDF,main_dic,maindic2 = EndUsersOrderGeneration(dicOrderDetail)        
 
-        print(maindic2)
-    
+        order_to_PDF(dicOrder,maindic2,'TestGarminStreamlit')
+       
+        with open("TestGarminStreamlit.pdf", "rb") as fp:
+          st.download_button(
+               '⬇️ Download Zip file',
+               data= fp,
+               file_name= f"TestGarminStreamlit.pdf"
+          )
 
 
-        fg.downloadKorePDF(dicOrder,dicOrderDetail)
-        fg.ClientFileGenerator(dicOrder,dicOrderDetail)
-
-        fg.downloadZipFile(dicOrder,dicOrderDetail)
 
 
 
