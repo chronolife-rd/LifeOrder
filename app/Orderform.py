@@ -109,7 +109,7 @@ def GetEndUserInformationEnglish (OrderDic):
                 EndUserHipsSize = EndUserFormLeftCol.number_input("End User EndUserHipsSize size :",1,key = f"{i} EndUserHipsSize")
                 EndUserReferenceSize = EndUserFormRightCol.number_input("End User EndUserReferenceSize size :",1,key = f"{i} EndUserReferenceSize")
                 EndUserAdaptateur = EndUserFormRightCol.selectbox("Adapteur Type :", 
-                            ("-","US","Europe"),key = f"{i} EndUserAdaptateur")
+                            ("Europe","US"),key = f"{i} EndUserAdaptateur")
 
 
                 endUserDict = {
@@ -146,7 +146,6 @@ def GetEndUserInformationEnglish (OrderDic):
     
         else :
             
-            st.warning("Pas end user séléctionné")
             submite = False
             df = []
             return submite,df

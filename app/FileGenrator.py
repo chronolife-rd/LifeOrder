@@ -99,8 +99,8 @@ def generateQuantityDic (dicOrder):
           else :
                quantyDoc["quantity_ASE_0_01"] += 0
 
-
      return  quantyDoc
+
 
 
 def completeKoreHtml (OrderInformation,OrderDetails):
