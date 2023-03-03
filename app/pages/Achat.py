@@ -2,7 +2,7 @@ import streamlit as st
 import sys
 
 sys.path.insert(0, '/app/pages')
-from  AlgoMatch import matching_taille,generatorOrder,globalContractInformation
+from  app.AlgoMatch import matching_taille,generatorOrder,globalContractInformation
 
 import EndUserClass
 

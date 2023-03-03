@@ -74,7 +74,7 @@ def generatorOrder(DataFrame, contract_type,contract_reference,contractor_name,c
 
  
     # pdf = pdfkit.from_string(html, False,configuration=pdfkit_config
-    css = ['style.css',"df_style.css"]
+    css = ["df_style.css"]
     pdf = pdfkit.from_file("index.html", css= css,verbose=True)
 
         
