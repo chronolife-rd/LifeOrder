@@ -69,18 +69,18 @@ def globalOrderToTable(globalOrder):
 
     globalOrderTale.append(title_line)
     globalOrderTale.append(["Institution / Company : ",f"{globalOrder['ClientInstitution']}"])
-    globalOrderTale.append(["RequiredDate",f"{globalOrder['RequiredDate']}"])
-    globalOrderTale.append(["ClientPhoneNumber",f"{globalOrder['ClientPhoneNumber']}"])
-    globalOrderTale.append(["ClientMailAddress",f"{globalOrder['ClientMailAddress']}"])
-    # globalOrderTale.append(["BillingReference",f"{globalOrder['BillingReference']}"])
-    # globalOrderTale.append(["OrderNumber",f"{globalOrder['OrderNumber']}"])
+    globalOrderTale.append(["Required Date",f"{globalOrder['RequiredDate']}"])
+    globalOrderTale.append(["Client Phone Number",f"{globalOrder['ClientPhoneNumber']}"])
+    globalOrderTale.append(["Client Mail Address",f"{globalOrder['ClientMailAddress']}"])
+    globalOrderTale.append(["Billing Reference",f"{globalOrder['BillingReference']}"])
+    globalOrderTale.append(["Client Reference",f"{globalOrder['ClientReference']}"])
     globalOrderTale.append(["Number",f"{globalOrder['ClientAddressNumber']}"])
     globalOrderTale.append(["Street",f"{globalOrder['ClientStreet']}"])
     globalOrderTale.append(["Attn",f"{globalOrder['ClientAttn']}"])
     globalOrderTale.append(["Site NR",f"{globalOrder['ClientSiteNR']}"])
     globalOrderTale.append(["ZIP code",f"{globalOrder['ClientZIPCode']}"])
     globalOrderTale.append(["City",f"{globalOrder['ClientCity']}"])
-    globalOrderTale.append(["ClientDepartement",f"{globalOrder['ClientDepartement']}"])
+    globalOrderTale.append(["Client Departement",f"{globalOrder['ClientDepartement']}"])
     globalOrderTale.append(["Country",f"{globalOrder['ClientCountry']}"])
 
     
@@ -93,7 +93,7 @@ def endUserListGeneratorV3 (endUserDic,endUserId):
     end_user_list = []
 
         
-    end_user_line = [f'{endUserId}','','']
+    end_user_line = [f'End user ID : {endUserId}','','']
     description_line = ['Reference','Description','Quantity']
 
     end_user_list.append(end_user_line)

@@ -18,7 +18,7 @@ def plotOrderInformation ():
             
             globalOrder1,globalOrder2 , globalOrder3= st.columns(3)
             BillingReference = globalOrder1.text_input("Biling Reference :")
-            OrderNumber = globalOrder1.text_input("Order Number :", "PO-FO-121123")
+            ClientReference = globalOrder1.text_input("Client Reference :", "PO-FO-121123")
 
             RequiredDate = globalOrder1.text_input("Required Order Date:",f"{Orderdate}")
 
@@ -49,7 +49,7 @@ def plotOrderInformation ():
                  
                  
                     "BillingReference":BillingReference,
-                    "OrderNumber": OrderNumber,
+                    "ClientReference": ClientReference,
                     "RequiredDate":RequiredDate,
                     
                     "ClientPhoneNumber": ClientPhoneNumber,
